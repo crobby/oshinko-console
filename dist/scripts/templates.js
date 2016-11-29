@@ -120,7 +120,7 @@ angular.module('oshinkoConsoleTemplates', []).run(['$templateCache', function($t
     "<span ng-switch-default class=\"fa fa-question text-danger\" aria-hidden=\"true\" ng-class=\"{'fa-fw': fixedWidth}\"></span>\n" +
     "<span> {{ getClusterStatus(oshinkoClusters[cluster]) }}</span>\n" +
     "</td>\n" +
-    "<td data-title=\"MasterURL\" name=\"masterurl-{{ cluster }}\" ng-click=\"gotoCluster(cluster)\">{{ getSparkMasterUrl(oshinkoClusters[cluster]) }}</td>\n" +
+    "<td data-title=\"MasterURL\" name=\"masterurl-{{ cluster }}\" ng-click=\"gotoCluster(cluster)\"><copy-to-clipboard clipboard-text=\"getSparkMasterUrl(oshinkoClusters[cluster])\"></copy-to-clipboard></td>\n" +
     "<td data-title=\"Workers\" name=\"workercount-{{ cluster }}\" ng-click=\"gotoCluster(cluster)\">{{ countWorkers(oshinkoClusters[cluster]) }}</td>\n" +
     "<td data-title=\"Actions\" class=\"text-xs-left text-right\">\n" +
     "<span uib-dropdown>\n" +
