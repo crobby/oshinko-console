@@ -12,6 +12,10 @@ addons:
 services:
   - docker
 before_install:
+  - echo "TRAVIS_PULL_REQUEST=${TRAVIS_PULL_REQUEST}"
+  - echo "TRAVIS_PULL_REQUEST_SLUG=${TRAVIS_PULL_REQUEST_SLUG}"
+  - echo "TRAVIS_PULL_REQUEST_BRANCH=${TRAVIS_PULL_REQUEST_BRANCH}"
+  - echo "TRAVIS_PULL_REQUEST_SHA=${TRAVIS_PULL_REQUEST_SHA}"
   - sudo apt-get update -qq
   - sudo sed -i "s/\DOCKER_OPTS=\"/DOCKER_OPTS=\"--insecure-registry=172.30.0.0\/16 /g" /etc/default/docker
   - sudo cat /etc/default/docker
