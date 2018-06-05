@@ -54,6 +54,33 @@ function install_extension() {
   oc logs $NEW_CONSOLE_POD
   echo "Listing of all pods"
   oc get pods --all-namespaces
+  wait_for_webui
+}
+
+function try_until_success {
+    # This is a really simple case that just tests for success.
+    # If more complicated waits are needed, we can use the oc commandline testsuite
+    echo $1
+    while true; do
+        set +e
+        eval $1
+        res=$?
+        set -e
+        if [ "$res" = 0 ]; then
+            break
+        fi
+        sleep 20s
+    done
+}
+
+function wait_for_webui {
+  local command=
+  IP="$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)"
+  TESTROUTE=https://$IP:8443/login
+  command="wget --no-check-certificate $TESTROUTE"
+  echo "Waiting for console to come up."
+  try_until_success "$command"
+  cat login && rm login
 }
 
 prepare
