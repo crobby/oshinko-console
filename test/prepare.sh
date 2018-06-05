@@ -76,11 +76,11 @@ function try_until_success {
 function wait_for_webui {
   local command=
   IP="$(ip addr show eth0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)"
-  TESTROUTE=https://$IP:8443/login
+  TESTROUTE=https://$IP:8443/console
   command="wget --no-check-certificate $TESTROUTE"
   echo "Waiting for console to come up."
   try_until_success "$command"
-  cat login && rm login
+  cat console && rm console
 }
 
 prepare
